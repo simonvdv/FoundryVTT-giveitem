@@ -1,9 +1,11 @@
 {
-  "id": "give-item",
-  "title": "Give item to another player",
-  "description": "A module to allow players to give an item to another player",
+  "id": "give-item-to-player",
+  "title": "Give Items Between Players",
+  "description": "A module that allows players in FoundryVTT to easily transfer items from their inventory to another player's character, streamlining item sharing during gameplay."
+",
   "authors": [{
-    "name": "simonvdv"
+    "name": "simonvdv",
+    "discord": : "m1st_densimon"
   }],
   "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
   "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem//issues",
