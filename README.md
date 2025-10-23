@@ -12,7 +12,7 @@ Their foundational work was incredibly helpful, and I’m grateful for the time 
 
 #### Information
 
-Sepichat has worked on this project in their free time. They mention that updates and fixes may take time, so please be patient and considerate when it comes to support.
+SimonVdV has worked on this project in his free time. Updates and fixes may take time, so please be patient and considerate when it comes to support.
 
 #### Support
 
