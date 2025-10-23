@@ -7,7 +7,7 @@
     "discord": "m1st_densimon"
   }],
   "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
-  "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem//issues",
+  "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
   "version": "3.0.0",
   "compatibility": {
     "minimum": "13.0.0",
