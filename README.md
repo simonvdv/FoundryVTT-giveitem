@@ -1,8 +1,3 @@
-Ah, I see what you're saying now! You want to thank **Sepichat** for their work on the original module, but the installation and additional info you're referring to should credit **Simonvdv** (the person who made changes or updates after Sepichat).
-
-Let me revise the acknowledgment and attribution based on that:
-
----
 
 ### Acknowledgment
 
