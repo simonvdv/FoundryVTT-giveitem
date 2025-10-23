@@ -9,8 +9,6 @@ Let me revise the acknowledgment and attribution based on that:
 I’d like to extend a huge thank you to [**Sepichat**](https://github.com/Sepichat) for creating the original **FoundryVTT-GiveItem** module.
 Their foundational work was incredibly helpful, and I’m grateful for the time they’ve spent on this project, making it available to the community.
 
-Additionally, credit to [**Simonvdv**](https://github.com/simonvdv) for maintaining and updating the module with the latest features, bug fixes, and improvements. Your contributions have been invaluable.
-
 ---
 
 ### Original Module Information (by Sepichat)
