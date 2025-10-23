@@ -31,3 +31,7 @@
     ]
   },
   "license": "LICENSE",
+  "socket": true,
+  "manifest": "module.json",
+  "download": "https://github.com/Sepichat/FoundryVTT-GiveItem/releases/download/v3.0.0/module.zip"
+}
