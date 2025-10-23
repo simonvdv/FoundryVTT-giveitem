@@ -4,7 +4,7 @@
   "description": "A module that allows players in FoundryVTT to easily transfer items from their inventory to another player's character, streamlining item sharing during gameplay.",
   "authors": [{
     "name": "simonvdv",
-    "discord": : "m1st_densimon"
+    "discord": "m1st_densimon"
   }],
   "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
   "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem//issues",
