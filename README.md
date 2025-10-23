@@ -16,8 +16,9 @@ Sepichat has worked on this project in their free time. They mention that update
 
 #### Support
 
-If you’d like to support Me, you can donate via PayPal here:
-[Donate via PayPal]([https://paypal.me/sepichat](https://www.paypal.com/donate/?hosted_button_id=WQ9KSEJTKGFHN))
+If you’d like to support Me, you can donate via PayPal here:  
+[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?hosted_button_id=WQ9KSEJTKGFHN)
+
 
 ---
 
