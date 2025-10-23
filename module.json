@@ -1,0 +1,33 @@
+{
+  "id": "give-item",
+  "title": "Give item to another player",
+  "description": "A module to allow players to give an item to another player",
+  "authors": [{
+    "name": "simonvdv"
+  }],
+  "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
+  "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem//issues",
+  "version": "3.0.0",
+  "compatibility": {
+    "minimum": "13.0.0",
+    "verified": "13.350"
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "./styles/give-item.css"
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.0.0",
+          "verified": "5.1.10"
+        }
+        }
+    ]
+  },
+  "license": "LICENSE",
