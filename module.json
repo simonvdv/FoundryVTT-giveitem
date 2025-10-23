@@ -32,6 +32,6 @@
   },
   "license": "LICENSE",
   "socket": true,
-  "manifest": "module.json",
+  "manifest": "https://github.com/simonvdv/FoundryVTT-giveitem/blob/507cf9de7688e03c7ffd3edb9570823578c0c948/module.json",
   "download": "https://github.com/Sepichat/FoundryVTT-GiveItem/releases/download/v3.0.0/module.zip"
 }
