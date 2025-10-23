@@ -33,6 +33,6 @@
   },
   "license": "LICENSE",
   "socket": true,
-  "manifest": "https://raw.githubusercontent.com/simonvdv/FoundryVTT-giveitem/refs/heads/main/module.json",
+  "manifest": "https://raw.githubusercontent.com/simonvdv/FoundryVTT-giveitem/module.json",
   "download": "https://github.com/simonvdv/FoundryVTT-giveitem/archive/refs/tags/1.0.0.zip"
 }
