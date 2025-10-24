@@ -119,7 +119,7 @@ Hooks.on('renderActorSheetWfrp4eCharacter', (sheet, html, character) => {
 
 Hooks.on('init', function () {
   console.log("Give Item Module | Init hook fired");
-  game.settings.register('give-item', 'give-item', {
+  game.settings.register('give-item-to-player', 'give-item', {
     name: 'Activate giving item',
     hint: 'Allows an actor to give an item to a different actor',
     scope: 'world',
@@ -134,7 +134,8 @@ Hooks.once('setup', async function () {
   console.log("Give Item Module | System ID:", game.system.id);
   console.log("Give Item Module | System Version:", game.system.version);
   
-  game.socket.on('module.give-item', packet => {
+  // Socket name must match module ID
+  game.socket.on('module.give-item-to-player', packet => {
       let data = packet.data;
       let type = packet.type;
       const actorId = packet.actorId;
@@ -157,7 +158,7 @@ Hooks.once('setup', async function () {
 
 Hooks.once('ready', function() {
   console.log("Give Item Module | Ready hook fired");
-  console.log("Give Item Module | Module active:", game.modules.get('give-item')?.active);
+  console.log("Give Item Module | Module active:", game.modules.get('give-item-to-player')?.active);
   
   // Detect if using V2 sheets
   if (game.system.id === 'dnd5e') {

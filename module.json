@@ -10,7 +10,7 @@
   "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
   "version": "1.0.0",
   "compatibility": {
-    "minimum": "13.0.0",
+    "minimum": "11.300",
     "verified": "13.350"
   },
   "esmodules": [
@@ -25,14 +25,22 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "4.0.0",
+          "minimum": "3.0.3",
           "verified": "5.1.10"
         }
+      },
+      {
+      "id": "pf2e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.13.0",
+          "verified": "5.13.6"
         }
+      }
     ]
   },
   "license": "LICENSE",
   "socket": true,
-  "manifest": "https://raw.githubusercontent.com/simonvdv/FoundryVTT-giveitem/module.json",
-  "download": "https://github.com/simonvdv/FoundryVTT-giveitem/archive/refs/heads/main.zip"
+  "manifest": "https://raw.githubusercontent.com/simonvdv/FoundryVTT-giveitem/download/1.0.0/module.json",
+  "download": "https://github.com/simonvdv/FoundryVTT-giveitem/releases/download/1.0.0./module.zip"
 }

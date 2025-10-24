@@ -213,7 +213,7 @@ function tradeConfirmed(tradeData) {
         receiveCurrency(tradeData)
     }
     sendMessageToGM(tradeData);
-    game.socket.emit('module.give-item', {
+    game.socket.emit('module.give-item-to-player', {
         data: tradeData,
         actorId: tradeData.currentActor.id,
         currentActorId: tradeData.actor.id,
@@ -222,7 +222,7 @@ function tradeConfirmed(tradeData) {
 }
 
 function tradeDenied(tradeData) {
-    game.socket.emit('module.give-item', {
+    game.socket.emit('module.give-item-to-player', {
         data: tradeData,
         actorId: tradeData.currentActor.id,
         currentActorId: tradeData.actor.id,

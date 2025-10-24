@@ -7,12 +7,19 @@ import { PlayerDialog } from "./dialog.js";
 export function addGiveItemButton5E_V2(html, actor) {
   console.log("Give Item Module | addGiveItemButton5E_V2 called");
   
-  // Find all item rows in the inventory
-  const itemRows = html.find(".item-row");
-  console.log("Give Item Module | Found item rows:", itemRows.length);
+  // ONLY target inventory items - exclude features, spells, etc.
+  const inventorySection = html.find("section.inventory, .tab.inventory");
+  if (inventorySection.length === 0) {
+    console.warn("Give Item Module | No inventory section found");
+    return;
+  }
+  
+  // Find item rows ONLY within the inventory section
+  const itemRows = inventorySection.find(".item-row");
+  console.log("Give Item Module | Found inventory item rows:", itemRows.length);
   
   if (itemRows.length === 0) {
-    console.warn("Give Item Module | No item rows found");
+    console.warn("Give Item Module | No item rows found in inventory");
     return;
   }
   
@@ -36,6 +43,17 @@ export function addGiveItemButton5E_V2(html, actor) {
     
     if (!itemId) {
       console.warn("Give Item Module | No item ID found for row");
+      return;
+    }
+    
+    // Verify this is actually an inventory item (not a spell/feat)
+    const item = actor.items.get(itemId);
+    if (!item) return;
+    
+    // Filter out non-inventory items
+    const inventoryTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container", "backpack"];
+    if (!inventoryTypes.includes(item.type)) {
+      console.log("Give Item Module | Skipping non-inventory item:", item.name, item.type);
       return;
     }
     
@@ -66,7 +84,7 @@ export function addGiveItemButton5E_V2(html, actor) {
     buttonsAdded++;
   });
   
-  console.log("Give Item Module | Give buttons added:", buttonsAdded);
+  console.log("Give Item Module | Give buttons added to inventory items:", buttonsAdded);
 }
 
 export function addGiveCurrency5E_V2(html, actor) {
@@ -127,15 +145,21 @@ export function addGiveItemButton(html, actor) {
 
 export function addGiveItemButton5E(html, actor) {
   console.log("Give Item Module | addGiveItemButton5E called (V1 legacy)");
-  console.log("Give Item Module | Looking for inventory items...");
   
-  // Find all item rows in the inventory
-  const itemRows = html.find(".inventory-list .item-row, .items-list .item");
-  console.log("Give Item Module | Found item rows:", itemRows.length);
+  // ONLY target inventory section
+  const inventorySection = html.find(".tab.inventory, .inventory");
+  if (inventorySection.length === 0) {
+    console.warn("Give Item Module | No inventory section found, trying V2");
+    addGiveItemButton5E_V2(html, actor);
+    return;
+  }
+  
+  // Find all item rows in the INVENTORY section only
+  const itemRows = inventorySection.find(".inventory-list .item, .items-list .item, .item-row");
+  console.log("Give Item Module | Found inventory item rows:", itemRows.length);
   
   if (itemRows.length === 0) {
     console.warn("Give Item Module | No item rows found. Trying V2 function...");
-    // Try V2 version
     addGiveItemButton5E_V2(html, actor);
     return;
   }
@@ -144,17 +168,29 @@ export function addGiveItemButton5E(html, actor) {
     const itemRow = $(this);
     const itemControls = itemRow.find(".item-controls");
     
-    console.log(`Give Item Module | Processing item ${index}, controls found:`, itemControls.length);
-    
     // Check if give button already exists
     if (itemControls.find(".item-give-module").length > 0) {
-      console.log(`Give Item Module | Button already exists for item ${index}`);
+      return;
+    }
+    
+    // Get item ID and verify it's an inventory item
+    const itemLi = itemRow.closest("li.item");
+    const itemId = itemLi.attr("data-item-id");
+    
+    if (!itemId) return;
+    
+    const item = actor.items.get(itemId);
+    if (!item) return;
+    
+    // Filter out non-inventory items
+    const inventoryTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container", "backpack"];
+    if (!inventoryTypes.includes(item.type)) {
+      console.log("Give Item Module | Skipping non-inventory item:", item.name, item.type);
       return;
     }
     
     // Try to find the equip button
     let equipButton = itemControls.find("button[data-action='equip'], a.item-control[data-action='equip']");
-    console.log(`Give Item Module | Equip button found for item ${index}:`, equipButton.length);
     
     if (equipButton.length > 0) {
       const giveButton = $(`
@@ -163,26 +199,22 @@ export function addGiveItemButton5E(html, actor) {
         </button>
       `);
       giveButton.insertAfter(equipButton);
-      console.log(`Give Item Module | Give button inserted for item ${index}`);
-    } else {
-      console.warn(`Give Item Module | No equip button found for item ${index}, trying to append to controls`);
-      // If no equip button, just append to controls
-      if (itemControls.length > 0) {
-        itemControls.append(`
-          <button type="button" class="unbutton config-button item-control item-give-module give-item" data-action="give-item" aria-label="Give Item" data-tooltip="Give Item">
-            <i class="fa-solid fa-hands-helping" inert=""></i>
-          </button>
-        `);
-      }
+    } else if (itemControls.length > 0) {
+      itemControls.append(`
+        <button type="button" class="unbutton config-button item-control item-give-module give-item" data-action="give-item" aria-label="Give Item" data-tooltip="Give Item">
+          <i class="fa-solid fa-hands-helping" inert=""></i>
+        </button>
+      `);
     }
   });
   
   const giveButtons = html.find(".item-control.item-give-module.give-item");
-  console.log("Give Item Module | Total give buttons added:", giveButtons.length);
+  console.log("Give Item Module | Total give buttons added to inventory:", giveButtons.length);
   giveButtons.on("click", giveItemHandler.bind(actor));
 }
 
 export function addGiveItemButtonPF2E(html, actor) {
+  // Only add to inventory items
   $(`
     <a class="item-control item-give-module give-item" title="Give item">
       <i class="fas fa-hands-helping"></i>
@@ -327,7 +359,7 @@ function giveItem(currentItemId) {
     if (quantity > currentItemQuantity) {
       return ui.notifications.error(`You cannot offer more items than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {
           currentItemId: currentItem.id,
           currentItemData: currentItem.toObject(),
@@ -353,7 +385,7 @@ function giveCurrency5E() {
     if (pp > currentCurrency.pp || gp > currentCurrency.gp || ep > currentCurrency.ep || sp > currentCurrency.sp || cp > currentCurrency.cp) {
       return ui.notifications.error(`You cannot offer more currency than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {quantity: {pp, gp, ep, sp, cp}},
         actorId: actor.id,
         currentActorId: currentActor.id,
@@ -375,7 +407,7 @@ function giveMainCurrencyPF1E() {
     if (pp > currentCurrency.pp || gp > currentCurrency.gp || sp > currentCurrency.sp || cp > currentCurrency.cp) {
       return ui.notifications.error(`You cannot offer more currency than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {quantity: {pp, gp, sp, cp}},
         actorId: actor.id,
         currentActorId: currentActor.id,
@@ -397,7 +429,7 @@ function giveMainCurrencyPF2E() {
     if (pp > currentCurrency.pp || gp > currentCurrency.gp || sp > currentCurrency.sp || cp > currentCurrency.cp) {
       return ui.notifications.error(`You cannot offer more currency than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {quantity: {pp, gp, sp, cp}},
         actorId: actor.id,
         currentActorId: currentActor.id,
@@ -420,7 +452,7 @@ function giveAltCurrencyPF1E() {
     if (pp > currentCurrency.pp || gp > currentCurrency.gp || sp > currentCurrency.sp || cp > currentCurrency.cp) {
       return ui.notifications.error(`You cannot offer more currency than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {quantity: {pp, gp, sp, cp}, alt: true},
         actorId: actor.id,
         currentActorId: currentActor.id,
@@ -446,7 +478,7 @@ function giveCurrencyWFRP4E() {
     if (gc > currentGC.system.quantity.value || ss > currentSS.system.quantity.value || bp > currentBP.system.quantity.value) {
       return ui.notifications.error(`You cannot offer more currency than you have`);
     } else {
-      game.socket.emit('module.give-item', {
+      game.socket.emit('module.give-item-to-player', {
         data: {quantity: {gc, ss, bp}},
         actorId: actor.id,
         currentActorId: currentActor.id,
