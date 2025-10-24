@@ -6,7 +6,7 @@ Their foundational work was incredibly helpful, and I’m grateful for the time 
 
 ---
 
-### Original Module Information (by Sepichat)
+### Module Information
 
 **FoundryVTT-GiveItem** allows players to easily give items they own to other players in **FoundryVTT**, without the hassle of using the compendium.
 
@@ -22,7 +22,7 @@ If you’d like to support Me, you can donate via PayPal here:
 
 ---
 
-### Installation (by Simonvdv)
+### Installation
 
 You can install the module in a few different ways. Here's how to do it:
 
