@@ -12,7 +12,7 @@ Their foundational work was incredibly helpful, and I’m grateful for the time 
 
 #### Information
 
-SimonVdV has worked on this project in his free time. Updates and fixes may take time, so please be patient and considerate when it comes to support.
+I'm working on this project on my free time. Updates and fixes may take time, so please be patient and considerate when it comes to support.
 
 #### Support
 
