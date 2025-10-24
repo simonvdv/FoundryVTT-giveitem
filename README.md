@@ -36,7 +36,7 @@ You can install the module in a few different ways. Here's how to do it:
 
   1. Go to the Add-on Modules tab.
   2. Paste the following URL into the Manifest field:
-     `https://raw.githubusercontent.com/simonvdv/FoundryVTT-giveitem/main/module.json`
+     `https://github.com/simonvdv/FoundryVTT-giveitem/releases/latest/download/module.json`
   3. Click *Install*.
 
 * **Manual Install:**
