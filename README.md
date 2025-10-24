@@ -42,6 +42,6 @@ You can install the module in a few different ways. Here's how to do it:
 * **Manual Install:**
 
   1. Clone or download the repository.
-  2. Extract it into your `Data/modules/give-item` folder.
+  2. Extract it into your `Data/modules/give-item-to-player` folder.
 
 ---
