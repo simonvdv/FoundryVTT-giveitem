@@ -8,7 +8,7 @@
   }],
   "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
   "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": {
     "minimum": "11.300",
     "verified": "13.350"
