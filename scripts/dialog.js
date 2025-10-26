@@ -20,26 +20,73 @@ export class PlayerDialog extends foundry.applications.api.DialogV2 {
       </div>
     </fieldset>`;
 
-    const currencyTemplate = `
+    const currencyTemplate = options.currentCurrency ? `
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div class="currency-row">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">Platinum (have: ${options.currentCurrency.pp})</label>
+        <div class="currency-controls" style="display: flex; flex-direction: row; gap: 4px; align-items: center;">
+          <button type="button" class="currency-btn currency-decrement" data-target="pp" style="padding: 4px 10px;">-</button>
+          <button type="button" class="currency-btn currency-increment" data-target="pp" style="padding: 4px 10px;">+</button>
+          <button type="button" class="currency-btn currency-max-btn" data-target="pp" data-max="${options.currentCurrency.pp}" style="padding: 4px 12px;">Max</button>
+          <input type="number" name="pp" value="0" min="0" max="${options.currentCurrency.pp}" step="1" style="width: 80px; text-align: center;">
+        </div>
+      </div>
+      <div class="currency-row">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">Electrum (have: ${options.currentCurrency.ep})</label>
+        <div class="currency-controls" style="display: flex; flex-direction: row; gap: 4px; align-items: center;">
+          <button type="button" class="currency-btn currency-decrement" data-target="ep" style="padding: 4px 10px;">-</button>
+          <button type="button" class="currency-btn currency-increment" data-target="ep" style="padding: 4px 10px;">+</button>
+          <button type="button" class="currency-btn currency-max-btn" data-target="ep" data-max="${options.currentCurrency.ep}" style="padding: 4px 12px;">Max</button>
+          <input type="number" name="ep" value="0" min="0" max="${options.currentCurrency.ep}" step="1" style="width: 80px; text-align: center;">
+        </div>
+      </div>
+      <div class="currency-row">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">Gold (have: ${options.currentCurrency.gp})</label>
+        <div class="currency-controls" style="display: flex; flex-direction: row; gap: 4px; align-items: center;">
+          <button type="button" class="currency-btn currency-decrement" data-target="gp" style="padding: 4px 10px;">-</button>
+          <button type="button" class="currency-btn currency-increment" data-target="gp" style="padding: 4px 10px;">+</button>
+          <button type="button" class="currency-btn currency-max-btn" data-target="gp" data-max="${options.currentCurrency.gp}" style="padding: 4px 12px;">Max</button>
+          <input type="number" name="gp" value="0" min="0" max="${options.currentCurrency.gp}" step="1" style="width: 80px; text-align: center;">
+        </div>
+      </div>
+      <div class="currency-row">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">Silver (have: ${options.currentCurrency.sp})</label>
+        <div class="currency-controls" style="display: flex; flex-direction: row; gap: 4px; align-items: center;">
+          <button type="button" class="currency-btn currency-decrement" data-target="sp" style="padding: 4px 10px;">-</button>
+          <button type="button" class="currency-btn currency-increment" data-target="sp" style="padding: 4px 10px;">+</button>
+          <button type="button" class="currency-btn currency-max-btn" data-target="sp" data-max="${options.currentCurrency.sp}" style="padding: 4px 12px;">Max</button>
+          <input type="number" name="sp" value="0" min="0" max="${options.currentCurrency.sp}" step="1" style="width: 80px; text-align: center;">
+        </div>
+      </div>
+      <div class="currency-row">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">Copper (have: ${options.currentCurrency.cp})</label>
+        <div class="currency-controls" style="display: flex; flex-direction: row; gap: 4px; align-items: center;">
+          <button type="button" class="currency-btn currency-decrement" data-target="cp" style="padding: 4px 10px;">-</button>
+          <button type="button" class="currency-btn currency-increment" data-target="cp" style="padding: 4px 10px;">+</button>
+          <button type="button" class="currency-btn currency-max-btn" data-target="cp" data-max="${options.currentCurrency.cp}" style="padding: 4px 12px;">Max</button>
+          <input type="number" name="cp" value="0" min="0" max="${options.currentCurrency.cp}" step="1" style="width: 80px; text-align: center;">
+        </div>
+      </div>
+    </div>` : `
     <div class="give-item-dialog currency">
       <label>Platinum:</label>
-      <input type="number" name="pp" value="0">
+      <input type="number" name="pp" value="0" min="0" step="1">
     </div>
     <div class="give-item-dialog currency">
       <label>Gold:</label>
-      <input type="number" name="gp" value="0">
+      <input type="number" name="gp" value="0" min="0" step="1">
     </div>
     <div class="give-item-dialog currency">
       <label>Electrum:</label>
-      <input type="number" name="ep" value="0">
+      <input type="number" name="ep" value="0" min="0" step="1">
     </div>
     <div class="give-item-dialog currency">
       <label>Silver:</label>
-      <input type="number" name="sp" value="0">
+      <input type="number" name="sp" value="0" min="0" step="1">
     </div>
     <div class="give-item-dialog currency">
       <label>Copper:</label>
-      <input type="number" name="cp" value="0">
+      <input type="number" name="cp" value="0" min="0" step="1">
     </div>`;
 
     const giveCurrencyTemplate = `
@@ -119,4 +166,51 @@ export class PlayerDialog extends foundry.applications.api.DialogV2 {
       modal: true
     });
   }
+  
+  _onRender(context, options) {
+  super._onRender(context, options);
+  
+  // Add event listeners for increment/decrement/max buttons
+  const incrementButtons = this.element.querySelectorAll('.currency-increment');
+  const decrementButtons = this.element.querySelectorAll('.currency-decrement');
+  const maxButtons = this.element.querySelectorAll('.currency-max-btn');
+  
+  incrementButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.currentTarget.dataset.target;
+      const input = this.element.querySelector(`input[name="${target}"]`);
+      const max = parseInt(input.getAttribute('max'));
+      const current = parseInt(input.value) || 0;
+      
+      if (current < max) {
+        input.value = current + 1;
+      }
+    });
+  });
+  
+  decrementButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.currentTarget.dataset.target;
+      const input = this.element.querySelector(`input[name="${target}"]`);
+      const min = parseInt(input.getAttribute('min')) || 0;
+      const current = parseInt(input.value) || 0;
+      
+      if (current > min) {
+        input.value = current - 1;
+      }
+    });
+  });
+  
+  maxButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.currentTarget.dataset.target;
+      const max = parseInt(e.currentTarget.dataset.max);
+      const input = this.element.querySelector(`input[name="${target}"]`);
+      input.value = max;
+    });
+  });
+}
 }
