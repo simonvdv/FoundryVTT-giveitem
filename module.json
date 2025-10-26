@@ -1,13 +1,13 @@
 {
   "id": "give-item-to-player",
   "title": "Give Items Between Players",
-  "description": "A module that allows players in FoundryVTT to easily transfer items from their inventory to another player's character, streamlining item sharing during gameplay.",
-  "authors": [{
-    "name": "simonvdv",
-    "discord": "m1st_densimon"
-  }],
-  "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
-  "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
+  "description": "A FoundryVTT module for D&D 5e that lets players easily trade items and currency between their characters. It adds intuitive 'give' buttons to character sheets, streamlining item and gold sharing without GM intervention.",
+  "authors": [
+    {
+      "name": "simonvdv",
+      "discord": "m1st_densimon"
+    }
+  ],
   "version": "1.0.2",
   "compatibility": {
     "minimum": "13.332",
@@ -17,7 +17,7 @@
     "scripts/main.js"
   ],
   "styles": [
-    "./styles/give-item.css"
+    "styles/give-item.css"
   ],
   "relationships": {
     "systems": [
@@ -33,6 +33,8 @@
   },
   "license": "LICENSE",
   "socket": true,
+  "url": "https://github.com/simonvdv/FoundryVTT-giveitem",
+  "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
   "manifest": "https://github.com/simonvdv/FoundryVTT-giveitem/releases/latest/download/module.json",
   "download": "https://github.com/simonvdv/FoundryVTT-giveitem/releases/download/1.0.2/module.zip"
 }
