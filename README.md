@@ -87,7 +87,7 @@ You can install the module in several ways:
 ### Support
 
 This is a personal project developed in my free time.
-Updates and fixes may take a while — your patience and understanding are appreciated.
+Updates and fixes may take a while your patience and understanding are appreciated.
 
 If you’d like to support my work, you can donate via PayPal:
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?hosted_button_id=WQ9KSEJTKGFHN)
