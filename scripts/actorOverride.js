@@ -155,9 +155,10 @@ function giveCurrency() {
     return;
   }
   
+  const currentCurrency = currentActor.system.currency;
+  
   const d = new PlayerDialog(({playerId, pp, gp, ep, sp, cp}) => {
     const actor = game.actors.get(playerId);
-    const currentCurrency = currentActor.system.currency;
     
     if (pp > currentCurrency.pp || gp > currentCurrency.gp || 
         ep > currentCurrency.ep || sp > currentCurrency.sp || 
@@ -175,7 +176,7 @@ function giveCurrency() {
     });
     
     ui.notifications.info(`Trade request sent to ${actor.name}`);
-  }, {acceptLabel: "Offer Currency", filteredPCList, currency: true});
+  }, {acceptLabel: "Offer Currency", filteredPCList, currency: true, currentCurrency});
   
   d.render(true);
 }
