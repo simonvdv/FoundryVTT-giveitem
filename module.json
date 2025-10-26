@@ -10,7 +10,7 @@
   "bugs": "https://github.com/simonvdv/FoundryVTT-giveitem/issues",
   "version": "1.0.2",
   "compatibility": {
-    "minimum": "11.300",
+    "minimum": "13.332",
     "verified": "13.350"
   },
   "esmodules": [
